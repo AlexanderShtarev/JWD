@@ -3,16 +3,18 @@ package com.epam.jwd.model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Point extends Figura {
+public class Point extends Figure {
+
     static Logger log = LoggerFactory.getLogger(Point.class);
 
     private int x;
 
-    public Point(final int x) {
+    public Point(int x) {
+        super();
         this.x = x;
     }
 
-    public int getPoint() {
+    public int getX() {
         return x;
     }
 

@@ -1,26 +1,28 @@
 package com.epam.jwd.model;
 
+import com.epam.jwd.strategy.OperationStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Square extends Figura {
+public class Square extends Figure implements IExists {
     Logger log = LoggerFactory.getLogger(Square.class);
 
+    private boolean ifFigure;
     final int a;
     final int b;
     final int c;
     final int d;
 
-    public Square(final int a, final int b, final int c, final int d) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
+    public Square(int a, int b, int c, int d) {
+        ifFigure = ((a != b) && (a != c) && (a != d) && (b != c) && (b != d) && (c != d));
+        this.a = Math.abs(a - b);
+        this.b = Math.abs(b - c);
+        this.c = Math.abs(c - d);
+        this.d = Math.abs(d - a);
     }
 
-    private boolean exists() {
+    public void exists() {
         ifExists = ((a == b) && (c == d)) || ((a == c) && (b == d)) || ((a == d) && (b == c));
-        return ifExists;
     }
 
     public void log() {
@@ -34,7 +36,7 @@ public class Square extends Figura {
 
     @Override
     public String toString() {
-        if (ifExists) {
+        if ((ifExists) && (ifFigure)) {
             return ("Квадрат со сторонами " + a + " " + b + " " + c + " " + d);
         } else {
             return ("Квадрат не может существовать");

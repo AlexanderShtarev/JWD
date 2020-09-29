@@ -3,29 +3,43 @@ package com.epam.jwd.model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Line extends Figura {
-    static Logger log = LoggerFactory.getLogger(Line.class);
+public class Line extends Figure {
+    private static Logger log = LoggerFactory.getLogger(Line.class);
+    private static Line singletonLine = null;
 
     private int a;
     private int b;
     private int line;
 
-    public Line(final int a, final int b) {
+    public static Line getInstance( int a, int b) {
+        if(singletonLine == null) {
+            singletonLine = new Line( a, b);
+        } return singletonLine;
+    }
+
+    public Line( int a, int b) {
         this.a = a;
         this.b = b;
         line = Math.abs(a - b);
     }
-
-    public int getLine() {
-        return line;
+    private void exists() {
+        ifExists = (a!=b);
     }
-
     public void log() {
-        log.info(toString());
+        exists();
+        if (ifExists) {
+            log.info(toString());
+        } else {
+            log.error(toString());
+        }
     }
 
     @Override
     public String toString() {
-        return "" + line;
+        if (ifExists) {
+            return (""+line);
+        } else {
+            return ("Объект не является фигурой");
+        }
     }
 }
