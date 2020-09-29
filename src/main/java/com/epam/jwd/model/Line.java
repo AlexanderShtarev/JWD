@@ -11,20 +11,23 @@ public class Line extends Figure {
     private int b;
     private int line;
 
-    public static Line getInstance( int a, int b) {
-        if(singletonLine == null) {
-            singletonLine = new Line( a, b);
-        } return singletonLine;
+    public static Line getInstance(final int a, final int b) {
+        if (singletonLine == null) {
+            singletonLine = new Line(a, b);
+        }
+        return singletonLine;
     }
 
-    public Line( int a, int b) {
+    public Line(final int a, final int b) {
         this.a = a;
         this.b = b;
         line = Math.abs(a - b);
     }
+
     private void exists() {
-        ifExists = (a!=b);
+        ifExists = (a != b);
     }
+
     public void log() {
         exists();
         if (ifExists) {
@@ -37,7 +40,7 @@ public class Line extends Figure {
     @Override
     public String toString() {
         if (ifExists) {
-            return (""+line);
+            return ("" + line);
         } else {
             return ("Объект не является фигурой");
         }

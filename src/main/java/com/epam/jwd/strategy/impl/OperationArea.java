@@ -4,17 +4,18 @@ import com.epam.jwd.strategy.OperationStrategy;
 
 public class OperationArea implements OperationStrategy {
 
-    private static OperationArea OPERATION_AREA_INSTANCE;
+    private static OperationArea Operation_Area_Instance;
+
     public static OperationArea getInstance() {
-        if (OPERATION_AREA_INSTANCE == null) {
-            OPERATION_AREA_INSTANCE = new OperationArea();
+        if (Operation_Area_Instance == null) {
+            Operation_Area_Instance = new OperationArea();
         }
-        return OPERATION_AREA_INSTANCE;
+        return Operation_Area_Instance;
     }
 
-    public int doOperation(int[] points) {
+    public int doOperation(final int[] points) {
         int area;
-        area = points[0]*points[1];
+        area = points[0] * points[1];
         System.out.println(area);
         return area;
     }

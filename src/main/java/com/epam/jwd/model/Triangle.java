@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Triangle extends Figure implements IExists {
-    static Logger log = LoggerFactory.getLogger(Triangle.class);
+    private static Logger log = LoggerFactory.getLogger(Triangle.class);
 
     private boolean ifFigure;
     private int a;

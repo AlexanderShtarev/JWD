@@ -7,7 +7,7 @@ public class MultiAngleFigure extends Figure {
     private static Logger log = LoggerFactory.getLogger(MultiAngleFigure.class);
     private int[] multiAngleFigurePoints;
 
-    public MultiAngleFigure(int[] points) {
+    public MultiAngleFigure(final int[] points) {
         multiAngleFigurePoints = new int[points.length];
         int i = 0;
         while (i < points.length) {

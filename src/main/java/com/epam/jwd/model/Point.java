@@ -5,11 +5,11 @@ import org.slf4j.LoggerFactory;
 
 public class Point extends Figure {
 
-    static Logger log = LoggerFactory.getLogger(Point.class);
+    private static Logger log = LoggerFactory.getLogger(Point.class);
 
     private int x;
 
-    public Point(int x) {
+    public Point(final int x) {
         super();
         this.x = x;
     }

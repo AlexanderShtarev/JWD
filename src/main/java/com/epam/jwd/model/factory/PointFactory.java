@@ -4,7 +4,7 @@ import com.epam.jwd.model.Point;
 
 public class PointFactory {
 
-    public Point createFigure(int x) {
+    public Point createFigure(final int x) {
         return new Point(x);
     }
 }

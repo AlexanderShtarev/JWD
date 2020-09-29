@@ -4,19 +4,21 @@ import com.epam.jwd.strategy.OperationStrategy;
 
 public class OperationPerimeter implements OperationStrategy {
 
-    private static OperationArea OPERATION_PERIMETER_INSTANCE;
+    private static OperationArea Operation_Perimeter_Instance;
+
     public static OperationArea getInstance() {
-        if (OPERATION_PERIMETER_INSTANCE == null) {
-            OPERATION_PERIMETER_INSTANCE = new OperationArea();
+        if (Operation_Perimeter_Instance == null) {
+            Operation_Perimeter_Instance = new OperationArea();
         }
-        return OPERATION_PERIMETER_INSTANCE;
+        return Operation_Perimeter_Instance;
     }
 
-    public int doOperation(int[] points) {
+    public int doOperation(final int[] points) {
         int perimeter = 0;
         int i = 0;
         while (i < points.length) {
-        perimeter += points[i]; }
+            perimeter += points[i];
+        }
         System.out.println(perimeter);
         return perimeter;
     }
