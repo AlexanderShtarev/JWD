@@ -1,27 +1,25 @@
 package com.epam.jwd.model.factory;
 
-import com.epam.jwd.model.Figure;
-import com.epam.jwd.model.Line;
-import com.epam.jwd.model.Square;
-import com.epam.jwd.model.Triangle;
-import com.epam.jwd.model.MultiAngleFigure;
+import com.epam.jwd.model.*;
+import com.epam.jwd.strategy.OperationStrategy;
 
-public class FigureFactory {
-    public Figure createFigure(final FigureTypes type, final int[] points) {
+public class FigureFactory implements Factory {
+
+    public Figure createFigure(FigureTypes type, OperationStrategy figurePropertiesStrategy, Point[] figureConsistence) {
         Figure toReturn = null;
         switch (type) {
             case LINE:
-                toReturn = new Line(points[0], points[1]);
+                toReturn = new Line(type, figurePropertiesStrategy, figureConsistence);
                 break;
             case TRIANGLE:
-                toReturn = new Triangle(points[0], points[1], points[2]);
+                toReturn = new Triangle(type, figurePropertiesStrategy, figureConsistence);
                 break;
             case SQUARE:
-                toReturn = new Square(points[0], points[1], points[2], points[3]);
+                toReturn = new Square(type, figurePropertiesStrategy, figureConsistence);
                 break;
             case MULTIANGLEFIGURE:
-                if ((points.length >= 4) && (points.length <= 6)) {
-                    toReturn = new MultiAngleFigure(points);
+                if ((figureConsistence.length >= 4) && (figureConsistence.length <= 6)) {
+                    toReturn = new MultiAngleFigure(type, figurePropertiesStrategy, figureConsistence);
                 }
                 break;
             default:

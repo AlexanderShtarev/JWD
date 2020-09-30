@@ -1,30 +1,34 @@
 package com.epam.jwd.model;
 
+import com.epam.jwd.model.factory.FigureTypes;
+import com.epam.jwd.strategy.OperationStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Triangle extends Figure implements IExists {
+public class Triangle extends Figure {
     private static Logger log = LoggerFactory.getLogger(Triangle.class);
 
-    private boolean ifFigure;
     private int a;
     private int b;
     private int c;
 
-    public Triangle(final int a, final int b, final int c) {
-        ifFigure = ((a != b) && (a != c) && (b != c));
-        this.a = Math.abs(a - b);
-        this.b = Math.abs(b - c);
-        this.c = Math.abs(c - a);
+    public Triangle(FigureTypes figureType, OperationStrategy figurePropertiesStrategy, Point[] figureConsistence) {
+        super(figureType, figurePropertiesStrategy, figureConsistence);
+        this.a = Math.abs(figureConsistence[0].getX() - figureConsistence[1].getX());
+        this.b = Math.abs(figureConsistence[1].getX() - figureConsistence[2].getX());
+        this.c = Math.abs(figureConsistence[2].getX() - figureConsistence[1].getX());
+        isFigure = ((figureConsistence[0].getX() != figureConsistence[1].getX())
+                && (figureConsistence[0].getX() != figureConsistence[2].getX())
+                && (figureConsistence[1].getX() != figureConsistence[2].getX()));
     }
 
-    public void exists() {
-        ifExists = ((a < b + c) && (b < a + c) && (c < a + b));
+    private void exists() {
+        isExists = ((a < b + c) && (b < a + c) && (c < a + b));
     }
 
     public void log() {
         exists();
-        if ((ifExists)) {
+        if ((isExists) && (isFigure)) {
             log.info(toString());
         } else {
             log.error(toString());
@@ -33,10 +37,14 @@ public class Triangle extends Figure implements IExists {
 
     @Override
     public String toString() {
-        if ((ifExists)) {
-            return ("Треугольик со сторонами " + a + ", " + b + " и " + c + ";");
+        String print = null;
+        if ((isExists) && (isFigure)) {
+            print = "Треугольник: " + a + " " + b + " " + c;
+        } else if (!isExists) {
+            print = "Треугольник не может существовать";
         } else {
-            return ("Треугольник не может существовать");
+            print = "Объект не является фигурой";
         }
+        return print;
     }
 }

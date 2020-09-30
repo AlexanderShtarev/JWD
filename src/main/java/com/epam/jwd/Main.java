@@ -7,8 +7,15 @@ import com.epam.jwd.model.Square;
 import com.epam.jwd.model.Triangle;
 import com.epam.jwd.model.MultiAngleFigure;
 import com.epam.jwd.model.factory.FigureFactory;
-import com.epam.jwd.model.factory.FigureTypes;
 import com.epam.jwd.model.factory.PointFactory;
+import com.epam.jwd.strategy.impl.OperationPerimeter;
+import com.epam.jwd.strategy.impl.OperationTriangleArea;
+
+import static com.epam.jwd.model.factory.FigureTypes.*;
+import static com.epam.jwd.strategy.impl.OperationMultiAngleFigureArea.OPERATION_MULTIANGLEFIGUREAREA_INSTANCE;
+import static com.epam.jwd.strategy.impl.OperationPerimeter.OPERATION_PERIMETER_INSTANCE;
+import static com.epam.jwd.strategy.impl.OperationSquareArea.OPERATION_SQUAREAREA_INSTANCE;
+import static com.epam.jwd.strategy.impl.OperationTriangleArea.OPERATION_TRIANGLEAREA_INSTANCE;
 
 class Main {
 
@@ -16,7 +23,7 @@ class Main {
     final static private int LINELENGTH = 4;
     final static private int TRIANGLELENGTH = 2;
     final static private int SQUARELENGTH = 1;
-    final static private int MULTIANGLEFIGURELEGTH = 2;
+    final static private int MULTIANGLEFIGURELENGTH = 2;
 
     public static void main(String[] args) {
         PointFactory factory = new PointFactory();
@@ -34,38 +41,49 @@ class Main {
             points[i].log();
             i++;
         }
+        Point[] line1points = new Point[]{points[0], points[1]};
+        Point[] line2points = new Point[]{points[0], points[2]};
+        Point[] line3points = new Point[]{points[0], points[3]};
+        Point[] line4points = new Point[]{points[0], points[4]};
 
-        Figure[] lines = new Line[LINELENGTH];
-        lines[0] = figureFactory.createFigure(FigureTypes.LINE, new int[]{points[0].getX(), points[0].getX()});
-        lines[1] = figureFactory.createFigure(FigureTypes.LINE, new int[]{points[0].getX(), points[1].getX()});
-        lines[2] = figureFactory.createFigure(FigureTypes.LINE, new int[]{points[2].getX(), points[3].getX()});
-        lines[3] = figureFactory.createFigure(FigureTypes.LINE, new int[]{points[1].getX(), points[2].getX()});
+        Point[] triangle1points = new Point[]{points[0], points[1], points[2]};
+        Point[] triangle2points = new Point[]{points[0], points[2], points[4]};
 
-        for (Figure line : lines) {
-            line.log();
+        Point[] square1points = new Point[]{points[0], points[3], points[2], points[4]};
+
+        Point[] multiAgnleFigure1points = new Point[]{points[0], points[1], points[1], points[2], points[4]};
+        Point[] multiAngleFigure2points = new Point[]{points[0], points[2], points[1], points[4]};
+
+        Figure[] line = new Line[LINELENGTH];
+        line[0] = figureFactory.createFigure(LINE, OPERATION_PERIMETER_INSTANCE, line1points);
+        line[1] = figureFactory.createFigure(LINE, OPERATION_PERIMETER_INSTANCE, line2points);
+        line[2] = figureFactory.createFigure(LINE, OPERATION_PERIMETER_INSTANCE, line3points);
+        line[3] = figureFactory.createFigure(LINE, OPERATION_PERIMETER_INSTANCE, line4points);
+
+        for (Figure el : line) {
+            el.log();
         }
 
-        Figure[] triangles = new Triangle[TRIANGLELENGTH];
-        triangles[0] = figureFactory.createFigure(FigureTypes.TRIANGLE, new int[]{points[0].getX(), points[1].getX(), points[2].getX()});
-        triangles[1] = figureFactory.createFigure(FigureTypes.TRIANGLE, new int[]{points[1].getX(), points[2].getX(), points[3].getX()});
+        Figure[] triangle = new Triangle[TRIANGLELENGTH];
+        triangle[0] = figureFactory.createFigure(TRIANGLE, OPERATION_TRIANGLEAREA_INSTANCE, triangle1points);
+        triangle[1] = figureFactory.createFigure(TRIANGLE, OPERATION_PERIMETER_INSTANCE, triangle2points);
 
-        for (Figure triangle : triangles) {
-            triangle.log();
+        for (Figure el : triangle) {
+            el.log();
         }
 
-        Figure[] squares = new Square[SQUARELENGTH];
-        squares[0] = figureFactory.createFigure(FigureTypes.SQUARE, new int[]{points[0].getX(), points[1].getX(), points[2].getX(), points[3].getX()});
+        Figure[] square = new Square[SQUARELENGTH];
+        square[0] = figureFactory.createFigure(SQUARE, OPERATION_SQUAREAREA_INSTANCE, square1points);
 
-        for (Figure square : squares) {
-            square.log();
+        for (Figure el : square) {
+            el.log();
         }
+        Figure[] multiAngleFigure = new MultiAngleFigure[MULTIANGLEFIGURELENGTH];
+        multiAngleFigure[0] = figureFactory.createFigure(MULTIANGLEFIGURE, OPERATION_PERIMETER_INSTANCE, multiAgnleFigure1points);
+        multiAngleFigure[1] = figureFactory.createFigure(MULTIANGLEFIGURE, OPERATION_MULTIANGLEFIGUREAREA_INSTANCE, multiAngleFigure2points);
 
-        Figure[] multiAngleFigures = new MultiAngleFigure[MULTIANGLEFIGURELEGTH];
-        multiAngleFigures[0] = figureFactory.createFigure(FigureTypes.MULTIANGLEFIGURE, new int[]{points[0].getX(), points[1].getX(), points[2].getX(), points[3].getX(), points[4].getX()});
-        multiAngleFigures[1] = figureFactory.createFigure(FigureTypes.MULTIANGLEFIGURE, new int[]{points[0].getX(), points[1].getX(), points[2].getX(), points[3].getX()});
-
-        for (Figure multiAngleFigure : multiAngleFigures) {
-            multiAngleFigure.log();
+        for (Figure el : multiAngleFigure) {
+            el.log();
         }
     }
 }

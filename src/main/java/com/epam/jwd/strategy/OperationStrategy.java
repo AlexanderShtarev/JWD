@@ -1,5 +1,7 @@
 package com.epam.jwd.strategy;
 
+import com.epam.jwd.model.Point;
+
 public interface OperationStrategy {
-    int doOperation(int[] points);
+    double doOperation(Point[] figureConsistence);
 }
