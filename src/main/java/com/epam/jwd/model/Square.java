@@ -2,6 +2,7 @@ package com.epam.jwd.model;
 
 import com.epam.jwd.model.factory.FigureTypes;
 import com.epam.jwd.strategy.OperationStrategy;
+import com.epam.jwd.strategy.impl.SquareStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,25 +13,30 @@ public class Square extends Figure {
     private int b;
     private int c;
     private int d;
-    private Point[] figureConsistence;
+    private Point[] figureConstituents;
+    OperationStrategy squarePropertiesStrategy;
 
-    public Square(FigureTypes figureType, OperationStrategy figurePropertiesStrategy, Point[] figureConsistence) {
-        super(figureType, figurePropertiesStrategy, figureConsistence);
-        this.figureConsistence = figureConsistence;
-        this.a = Math.abs(figureConsistence[0].getX() - figureConsistence[1].getX());
-        this.b = Math.abs(figureConsistence[1].getX() - figureConsistence[2].getX());
-        this.c = Math.abs(figureConsistence[2].getX() - figureConsistence[3].getX());
-        this.d = Math.abs(figureConsistence[3].getX() - figureConsistence[1].getX());
+    public Square(FigureTypes figureType, SquareStrategy squarePropertiesStrategy, Point[] figureConstituents) {
+        super(figureType, squarePropertiesStrategy, figureConstituents);
+        this.figureConstituents = figureConstituents;
+        this.squarePropertiesStrategy = squarePropertiesStrategy;
+        this.a = Math.abs(figureConstituents[0].getX() - figureConstituents[1].getX());
+        this.b = Math.abs(figureConstituents[1].getX() - figureConstituents[2].getX());
+        this.c = Math.abs(figureConstituents[2].getX() - figureConstituents[3].getX());
+        this.d = Math.abs(figureConstituents[3].getX() - figureConstituents[1].getX());
     }
 
-        private void exists() {
+    public boolean exists() {
         isExists = ((a == b) && (c == d)) || ((a == c) && (b == d)) || ((a == d) && (b == c));
-        isFigure = figureConsistence[0].getX() != figureConsistence[1].getX()
-                && figureConsistence[0].getX() != figureConsistence[2].getX()
-                && figureConsistence[0].getX() != figureConsistence[3].getX()
-                && figureConsistence[1].getX() != figureConsistence[2].getX()
-                && figureConsistence[1].getX() != figureConsistence[3].getX()
-                && figureConsistence[2].getX() != figureConsistence[3].getX();
+        if ((figureConstituents[0].getX() != figureConstituents[1].getX())
+                && (figureConstituents[0].getX() != figureConstituents[2].getX())
+                && (figureConstituents[0].getX() != figureConstituents[3].getX())
+                && (figureConstituents[1].getX() != figureConstituents[2].getX())
+                && (figureConstituents[1].getX() != figureConstituents[3].getX())
+                && (figureConstituents[2].getX() != figureConstituents[3].getX())) {
+            isFigure = true;
+        } else isFigure = false;
+        return (isExists) && (isFigure);
     }
 
     public void log() {
@@ -42,15 +48,26 @@ public class Square extends Figure {
         }
     }
 
+    public double executeStrategy(Point[] figureConstituents) {
+        squarePropertiesStrategy.doOperationPerimeter(figureConstituents);
+        squarePropertiesStrategy.doOperationArea(figureConstituents);
+        return 2;
+    }
+
+    @Override
+    public Point[] getModel() {
+        return figureConstituents;
+    }
+
     @Override
     public String toString() {
         String print = null;
         if ((isExists) && (isFigure)) {
             print = "Квадрат: " + a + " " + b + " " + c;
         } else if (!isExists) {
-            print = "Квадрат не может существовать";
+            print = "Объект не может существовать";
         } else {
-            print = "Квадрат не является фигурой";
+            print = "Объект не является фигурой";
         }
         return print;
     }

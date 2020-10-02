@@ -9,6 +9,7 @@ public abstract class Figure {
     private OperationStrategy figurePropertiesStrategy;
     boolean isFigure = true;
     boolean isExists = true;
+    private Point[] figureConstituents;
 
     public abstract void log();
 
@@ -16,14 +17,25 @@ public abstract class Figure {
         this.id = id;
     }
 
-    public FigureTypes getType() { return figureType; }
-
-    Figure(FigureTypes figureType, OperationStrategy figurePropertiesStrategy, Point[] figureConsistence) {
-        this.figurePropertiesStrategy = figurePropertiesStrategy;
-        this.figureType = figureType;
+    public FigureTypes getType() {
+        return figureType;
     }
 
-    public double executeStrategy(Point[] points) {
-        return figurePropertiesStrategy.doOperation(points);
+    public abstract boolean exists();
+
+    Figure(FigureTypes figureType, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+        this.figurePropertiesStrategy = figurePropertiesStrategy;
+        this.figureType = figureType;
+        this.figureConstituents = figureConstituents;
+    }
+
+    public double executeStrategy(Point[] figureConstituents) {
+        figurePropertiesStrategy.doOperationPerimeter(figureConstituents);
+        figurePropertiesStrategy.doOperationArea(figureConstituents);
+        return 2;
+    }
+
+    public Point[] getModel() {
+        return figureConstituents;
     }
 }

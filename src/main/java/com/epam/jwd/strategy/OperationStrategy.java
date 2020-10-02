@@ -3,5 +3,7 @@ package com.epam.jwd.strategy;
 import com.epam.jwd.model.Point;
 
 public interface OperationStrategy {
-    double doOperation(Point[] figureConsistence);
+    double doOperationArea(Point[] figureConstituents);
+
+    int doOperationPerimeter(Point[] figureConstituents);
 }

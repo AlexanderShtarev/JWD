@@ -2,6 +2,7 @@ package com.epam.jwd.model;
 
 import com.epam.jwd.model.factory.FigureTypes;
 import com.epam.jwd.strategy.OperationStrategy;
+import com.epam.jwd.strategy.impl.TriangeStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,19 +12,24 @@ public class Triangle extends Figure {
     private int a;
     private int b;
     private int c;
+    private Point[] figureConstituents;
+    OperationStrategy triangleStrategyInstance;
 
-    public Triangle(FigureTypes figureType, OperationStrategy figurePropertiesStrategy, Point[] figureConsistence) {
-        super(figureType, figurePropertiesStrategy, figureConsistence);
-        this.a = Math.abs(figureConsistence[0].getX() - figureConsistence[1].getX());
-        this.b = Math.abs(figureConsistence[1].getX() - figureConsistence[2].getX());
-        this.c = Math.abs(figureConsistence[2].getX() - figureConsistence[1].getX());
-        isFigure = ((figureConsistence[0].getX() != figureConsistence[1].getX())
-                && (figureConsistence[0].getX() != figureConsistence[2].getX())
-                && (figureConsistence[1].getX() != figureConsistence[2].getX()));
+    public Triangle(FigureTypes figureType, TriangeStrategy triangleStrategyInstance, Point[] figureConstituents) {
+        super(figureType, triangleStrategyInstance, figureConstituents);
+        this.figureConstituents = figureConstituents;
+        this.triangleStrategyInstance = triangleStrategyInstance;
+        this.a = Math.abs(figureConstituents[0].getX() - figureConstituents[1].getX());
+        this.b = Math.abs(figureConstituents[1].getX() - figureConstituents[2].getX());
+        this.c = Math.abs(figureConstituents[2].getX() - figureConstituents[0].getX());
+        isFigure = ((figureConstituents[0].getX() != figureConstituents[1].getX())
+                && (figureConstituents[0].getX() != figureConstituents[2].getX())
+                && (figureConstituents[1].getX() != figureConstituents[2].getX()));
     }
 
-    private void exists() {
+    public boolean exists() {
         isExists = ((a < b + c) && (b < a + c) && (c < a + b));
+        return (isExists) && (isFigure);
     }
 
     public void log() {
@@ -33,6 +39,17 @@ public class Triangle extends Figure {
         } else {
             log.error(toString());
         }
+    }
+
+    public double executeStrategy(Point[] figureConstituents) {
+        triangleStrategyInstance.doOperationPerimeter(figureConstituents);
+        triangleStrategyInstance.doOperationArea(figureConstituents);
+        return 2;
+    }
+
+    @Override
+    public Point[] getModel() {
+        return figureConstituents;
     }
 
     @Override
