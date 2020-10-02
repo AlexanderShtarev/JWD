@@ -4,7 +4,7 @@ import com.epam.jwd.model.*;
 import com.epam.jwd.model.factory.PointFactory;
 
 import static com.epam.jwd.model.factory.FigureFactory.*;
-import static com.epam.jwd.model.factory.FigureTypes.*;
+import static com.epam.jwd.model.factory.ENUM.*;
 
 class Main {
     final static private int POINTLENGTH = 5;

@@ -1,14 +1,15 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.model.factory.FigureTypes;
+import com.epam.jwd.model.factory.ENUM;
 import com.epam.jwd.strategy.OperationStrategy;
 
 public abstract class Figure {
-    protected static long id;
-    private FigureTypes figureType;
-    private OperationStrategy figurePropertiesStrategy;
+    private static long id;
+    String name;
     boolean isFigure = true;
     boolean isExists = true;
+    private ENUM figureType;
+    private OperationStrategy figurePropertiesStrategy;
     private Point[] figureConstituents;
 
     public abstract void log();
@@ -17,15 +18,11 @@ public abstract class Figure {
         this.id = id;
     }
 
-    public FigureTypes getType() {
-        return figureType;
-    }
-
     public abstract boolean exists();
 
-    Figure(FigureTypes figureType, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+    Figure(String name, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
         this.figurePropertiesStrategy = figurePropertiesStrategy;
-        this.figureType = figureType;
+        this.name = name;
         this.figureConstituents = figureConstituents;
     }
 

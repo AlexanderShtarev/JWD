@@ -1,6 +1,5 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.model.factory.FigureTypes;
 import com.epam.jwd.strategy.OperationStrategy;
 import com.epam.jwd.strategy.impl.LineStrategy;
 import org.slf4j.Logger;
@@ -10,16 +9,15 @@ public class Line extends Figure {
     private static Logger log = LoggerFactory.getLogger(Line.class);
 
     private Point[] figureConstituents;
-    private FigureTypes figureTypes;
     private OperationStrategy linePropertiesStrategy;
     private int a;
     private int b;
     private int line;
 
-    public Line(FigureTypes figureType, LineStrategy linePropertiesStrategy, Point[] figureConstituents) {
-        super(figureType, linePropertiesStrategy, figureConstituents);
+    public Line(String name, LineStrategy linePropertiesStrategy, Point[] figureConstituents) {
+        super(name, linePropertiesStrategy, figureConstituents);
         this.linePropertiesStrategy = linePropertiesStrategy;
-        this.figureTypes = figureType;
+        this.name = name;
         this.figureConstituents = figureConstituents;
         this.a = figureConstituents[0].getX();
         this.b = figureConstituents[1].getX();

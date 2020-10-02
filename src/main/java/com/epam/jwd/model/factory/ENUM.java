@@ -1,6 +1,6 @@
 package com.epam.jwd.model.factory;
 
-public enum FigureTypes {
+public enum ENUM {
     LINE,
     TRIANGLE,
     SQUARE,

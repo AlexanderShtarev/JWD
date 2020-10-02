@@ -1,6 +1,5 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.model.factory.FigureTypes;
 import com.epam.jwd.strategy.OperationStrategy;
 import com.epam.jwd.strategy.impl.TriangeStrategy;
 import org.slf4j.Logger;
@@ -13,11 +12,12 @@ public class Triangle extends Figure {
     private int b;
     private int c;
     private Point[] figureConstituents;
-    OperationStrategy triangleStrategyInstance;
+    private OperationStrategy triangleStrategyInstance;
 
-    public Triangle(FigureTypes figureType, TriangeStrategy triangleStrategyInstance, Point[] figureConstituents) {
-        super(figureType, triangleStrategyInstance, figureConstituents);
+    public Triangle(String name, TriangeStrategy triangleStrategyInstance, Point[] figureConstituents) {
+        super(name, triangleStrategyInstance, figureConstituents);
         this.figureConstituents = figureConstituents;
+        this.name = name;
         this.triangleStrategyInstance = triangleStrategyInstance;
         this.a = Math.abs(figureConstituents[0].getX() - figureConstituents[1].getX());
         this.b = Math.abs(figureConstituents[1].getX() - figureConstituents[2].getX());

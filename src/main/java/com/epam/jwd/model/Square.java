@@ -1,6 +1,5 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.model.factory.FigureTypes;
 import com.epam.jwd.strategy.OperationStrategy;
 import com.epam.jwd.strategy.impl.SquareStrategy;
 import org.slf4j.Logger;
@@ -14,11 +13,12 @@ public class Square extends Figure {
     private int c;
     private int d;
     private Point[] figureConstituents;
-    OperationStrategy squarePropertiesStrategy;
+    private OperationStrategy squarePropertiesStrategy;
 
-    public Square(FigureTypes figureType, SquareStrategy squarePropertiesStrategy, Point[] figureConstituents) {
-        super(figureType, squarePropertiesStrategy, figureConstituents);
+    public Square(String name, SquareStrategy squarePropertiesStrategy, Point[] figureConstituents) {
+        super(name, squarePropertiesStrategy, figureConstituents);
         this.figureConstituents = figureConstituents;
+        this.name = name;
         this.squarePropertiesStrategy = squarePropertiesStrategy;
         this.a = Math.abs(figureConstituents[0].getX() - figureConstituents[1].getX());
         this.b = Math.abs(figureConstituents[1].getX() - figureConstituents[2].getX());
