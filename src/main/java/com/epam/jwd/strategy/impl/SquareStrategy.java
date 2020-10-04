@@ -18,11 +18,13 @@ public class SquareStrategy implements OperationStrategy {
 
     @Override
     public double doOperationArea(Point[] figureConstituents) {
-        return figureConstituents[0].getX() * figureConstituents[0].getX();
+        int a = Math.abs(figureConstituents[0].getX() - figureConstituents[1].getX());
+        return a*a;
     }
 
     @Override
     public int doOperationPerimeter(Point[] figureConstituents) {
-        return figureConstituents[0].getX() * 4;
+        int a = Math.abs(figureConstituents[0].getX() - figureConstituents[1].getX());
+        return a * 4;
     }
 }

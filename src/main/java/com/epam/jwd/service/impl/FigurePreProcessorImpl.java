@@ -20,8 +20,7 @@ public class FigurePreProcessorImpl implements FigurePreProcessor {
         this.type = type;
         if (!isFigure()) throw new FigureException();
         if (!exists()) throw new FigureNotExistException();
-        final Figure toReturn = Storage.checkIsUnique(type, points);
-        return toReturn;
+        return Storage.checkIsUnique(type, points);
     }
 
     private boolean isFigure() {
@@ -65,9 +64,9 @@ public class FigurePreProcessorImpl implements FigurePreProcessor {
                 int i = 0;
                 int p = 0;
                 while (i < points.length - 2) {
-                    p += points[i].getX();
+                    p += Math.abs(points[i].getX()-points[i+1].getX());
                 }
-                isExists = points[points.length - 1].getX() < p;
+                isExists = (points[points.length - 1].getX()-points[0].getX()) < p;
                 break;
         }
         return isExists;
