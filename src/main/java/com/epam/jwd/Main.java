@@ -2,10 +2,10 @@ package com.epam.jwd;
 
 import com.epam.jwd.exception.FigureException;
 import com.epam.jwd.model.*;
-import com.epam.jwd.model.factory.PointFactory;
 
 import static com.epam.jwd.model.factory.FigureFactory.*;
 import static com.epam.jwd.model.factory.FigureType.*;
+import static com.epam.jwd.model.factory.PointFactory.POINT_FACTORY;
 
 class Main {
     final static private int POINTLENGTH = 5;
@@ -15,14 +15,12 @@ class Main {
     final static private int MULTIANGLEFIGURELENGTH = 2;
 
     public static void main(String[] args) throws FigureException {
-        PointFactory factory = new PointFactory();
-
         Point[] points = new Point[POINTLENGTH];
-        points[0] = factory.createFigure(3);
-        points[1] = factory.createFigure(5);
-        points[2] = factory.createFigure(9);
-        points[3] = factory.createFigure(6);
-        points[4] = factory.createFigure(7);
+        points[0] = POINT_FACTORY.createFigure(5);
+        points[1] = POINT_FACTORY.createFigure(7);
+        points[2] = POINT_FACTORY.createFigure(9);
+        points[3] = POINT_FACTORY.createFigure(6);
+        points[4] = POINT_FACTORY.createFigure(10);
 
         int i = 0;
         while (i < POINTLENGTH) {
@@ -38,8 +36,6 @@ class Main {
 
         for (Figure el : line) {
             el.log();
-            System.out.println(el.executeAreaStrategy());
-            el.executePerimeterStrategy();
         }
 
         Figure[] triangle = new Triangle[TRIANGLELENGTH];
@@ -48,8 +44,6 @@ class Main {
 
         for (Figure el : triangle) {
             el.log();
-            el.executeAreaStrategy();
-            el.executePerimeterStrategy();
         }
 
         Figure[] square = new Square[SQUARELENGTH];
@@ -57,10 +51,7 @@ class Main {
 
         for (Figure el : square) {
             el.log();
-            el.executeAreaStrategy();
-            el.executePerimeterStrategy();
         }
-
         Figure[] multiAngleFigure = new MultiAngleFigure[MULTIANGLEFIGURELENGTH];
         multiAngleFigure[0] = FIGURE_FACTORY.createFigure(MULTIANGLEFIGURE, new Point[]{points[0], points[1], points[2],
                 points[4], points[3]});
@@ -69,8 +60,6 @@ class Main {
 
         for (Figure el : multiAngleFigure) {
             el.log();
-            el.executeAreaStrategy();
-            el.executePerimeterStrategy();
         }
     }
 }

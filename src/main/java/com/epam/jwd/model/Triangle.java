@@ -9,7 +9,11 @@ import java.util.Arrays;
 public class Triangle extends Figure {
     private static Logger log = LoggerFactory.getLogger(Triangle.class);
 
-    public Triangle(String name, TriangeStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+    public static Triangle createTriangle(String name, TriangeStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+        return new Triangle(name, figurePropertiesStrategy, figureConstituents);
+    }
+
+    private Triangle(String name, TriangeStrategy figurePropertiesStrategy, Point[] figureConstituents) {
         super(name, figurePropertiesStrategy, figureConstituents);
     }
 

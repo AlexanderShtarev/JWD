@@ -9,7 +9,11 @@ import java.util.Arrays;
 public class Square extends Figure {
     private static Logger log = LoggerFactory.getLogger(Square.class);
 
-    public Square(String name, SquareStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+    public static Square createSquare(String name, SquareStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+        return new Square(name, figurePropertiesStrategy, figureConstituents);
+    }
+
+    private Square(String name, SquareStrategy figurePropertiesStrategy, Point[] figureConstituents) {
         super(name, figurePropertiesStrategy, figureConstituents);
     }
 

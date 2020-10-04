@@ -13,6 +13,10 @@ public class MultiAngleStrategy implements OperationStrategy {
 
     @Override
     public int doOperationPerimeter(Point[] figureConstituents) {
-        return figureConstituents[0].getX() + figureConstituents[1].getX();
+        int perimeter = 0;
+        for (Point point : figureConstituents) {
+            perimeter += point.getX();
+        }
+        return perimeter;
     }
 }

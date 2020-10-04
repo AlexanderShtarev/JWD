@@ -9,7 +9,11 @@ import java.util.Arrays;
 public class MultiAngleFigure extends Figure {
     private static Logger log = LoggerFactory.getLogger(MultiAngleFigure.class);
 
-    public MultiAngleFigure(String name, MultiAngleStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+    public static MultiAngleFigure createMultiAngle(String name, MultiAngleStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+        return new MultiAngleFigure(name, figurePropertiesStrategy, figureConstituents);
+    }
+
+    private MultiAngleFigure(String name, MultiAngleStrategy figurePropertiesStrategy, Point[] figureConstituents) {
         super(name, figurePropertiesStrategy, figureConstituents);
     }
 
@@ -24,6 +28,6 @@ public class MultiAngleFigure extends Figure {
 
     @Override
     public String toString() {
-        return Arrays.toString(figureConstituents);
+        return "Points: " + Arrays.toString(figureConstituents);
     }
 }

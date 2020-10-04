@@ -23,6 +23,6 @@ public class SquareStrategy implements OperationStrategy {
 
     @Override
     public int doOperationPerimeter(Point[] figureConstituents) {
-        return figureConstituents[0].getX() * figureConstituents[0].getX() * figureConstituents[0].getX() * figureConstituents[0].getX();
+        return figureConstituents[0].getX() * 4;
     }
 }

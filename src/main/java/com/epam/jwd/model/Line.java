@@ -7,9 +7,13 @@ import org.slf4j.LoggerFactory;
 public class Line extends Figure {
     private static Logger log = LoggerFactory.getLogger(Line.class);
 
+    public static Line createLine(String name, LineStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+        return new Line(name, figurePropertiesStrategy, figureConstituents);
+    }
+
     private int line;
 
-    public Line(String name, LineStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+    private Line(String name, LineStrategy figurePropertiesStrategy, Point[] figureConstituents) {
         super(name, figurePropertiesStrategy, figureConstituents);
         line = Math.abs(figureConstituents[0].getX() - figureConstituents[1].getX());
     }

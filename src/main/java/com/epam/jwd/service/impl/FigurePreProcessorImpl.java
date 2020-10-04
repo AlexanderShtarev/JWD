@@ -5,6 +5,7 @@ import com.epam.jwd.exception.FigureNotExistException;
 import com.epam.jwd.model.Figure;
 import com.epam.jwd.model.Point;
 import com.epam.jwd.model.factory.FigureType;
+import com.epam.jwd.model.factory.Storage;
 import com.epam.jwd.service.FigurePreProcessor;
 
 public class FigurePreProcessorImpl implements FigurePreProcessor {
@@ -19,7 +20,8 @@ public class FigurePreProcessorImpl implements FigurePreProcessor {
         this.type = type;
         if (!isFigure()) throw new FigureException();
         if (!exists()) throw new FigureNotExistException();
-        return null;
+        final Figure toReturn = Storage.checkIsUnique(type, points);
+        return toReturn;
     }
 
     private boolean isFigure() {
