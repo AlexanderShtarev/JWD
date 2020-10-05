@@ -64,9 +64,9 @@ public class FigurePreProcessorImpl implements FigurePreProcessor {
                 int i = 0;
                 int p = 0;
                 while (i < points.length - 2) {
-                    p += Math.abs(points[i].getX()-points[i+1].getX());
+                    p += Math.abs(points[i].getX() - points[i + 1].getX());
                 }
-                isExists = (points[points.length - 1].getX()-points[0].getX()) < p;
+                isExists = (points[points.length - 1].getX() - points[0].getX()) < p;
                 break;
         }
         return isExists;

@@ -8,7 +8,7 @@ public class Line extends Figure {
     private static Logger log = LoggerFactory.getLogger(Line.class);
 
     public static Line createLine(String name, LineStrategy figurePropertiesStrategy, Point[] figureConstituents) {
-            return new Line(name,figurePropertiesStrategy,figureConstituents);
+        return new Line(name, figurePropertiesStrategy, figureConstituents);
     }
 
     private int line;

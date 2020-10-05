@@ -19,7 +19,7 @@ public class SquareStrategy implements OperationStrategy {
     @Override
     public double doOperationArea(Point[] figureConstituents) {
         int a = Math.abs(figureConstituents[0].getX() - figureConstituents[1].getX());
-        return a*a;
+        return a * a;
     }
 
     @Override

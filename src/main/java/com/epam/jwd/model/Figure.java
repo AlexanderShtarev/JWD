@@ -4,7 +4,7 @@ import com.epam.jwd.model.factory.FigureType;
 import com.epam.jwd.strategy.OperationStrategy;
 
 public abstract class Figure {
-    private static int id ;
+    private static int id;
     protected int figureID;
     protected String name;
     private OperationStrategy figurePropertiesStrategy;
