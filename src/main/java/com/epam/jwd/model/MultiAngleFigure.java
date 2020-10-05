@@ -28,6 +28,6 @@ public class MultiAngleFigure extends Figure {
 
     @Override
     public String toString() {
-        return "Points: " + Arrays.toString(figureConstituents);
+        return "Name: " + name + " ID: " + figureID + " Points: " + Arrays.toString(figureConstituents);
     }
 }

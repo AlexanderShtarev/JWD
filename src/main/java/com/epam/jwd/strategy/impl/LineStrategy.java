@@ -8,11 +8,13 @@ public class LineStrategy implements OperationStrategy {
 
     @Override
     public double doOperationArea(Point[] figureConstituents) {
+        System.out.println("Area doesn't exist");
         return 0;
     }
 
     @Override
     public int doOperationPerimeter(Point[] figureConstituents) {
+        System.out.println("Perimeter doesn't exist");
         return 0;
     }
 }

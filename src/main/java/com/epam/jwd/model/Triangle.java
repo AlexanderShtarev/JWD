@@ -28,6 +28,6 @@ public class Triangle extends Figure {
 
     @Override
     public String toString() {
-        return Arrays.toString(figureConstituents);
+        return "Name: " + name + " ID: " + figureID + " Points: " + Arrays.toString(figureConstituents);
     }
 }
