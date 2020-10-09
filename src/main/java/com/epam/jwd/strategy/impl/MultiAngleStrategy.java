@@ -3,12 +3,21 @@ package com.epam.jwd.strategy.impl;
 import com.epam.jwd.model.Point;
 import com.epam.jwd.strategy.OperationStrategy;
 
+import static com.epam.jwd.util.CreateLineUtil.CreateLine;
+
 public class MultiAngleStrategy implements OperationStrategy {
-    public final static MultiAngleStrategy MULTIANGLE_STRATEGY_INSTANCE = new MultiAngleStrategy();
+    public static MultiAngleStrategy multiangle_strategy_instance = new MultiAngleStrategy();
 
     @Override
     public double doOperationArea(Point[] figureConstituents) {
-        return 0;
+        double area = 0;
+        int j = figureConstituents.length - 1;
+        int i;
+        for (i = 0; i < figureConstituents.length; i++) {
+            area += (figureConstituents[j].getX() + figureConstituents[i].getX()) * (figureConstituents[j].getY() - figureConstituents[i].getY());
+            j = i;
+        }
+        return area / 2;
     }
 
     @Override
@@ -16,13 +25,13 @@ public class MultiAngleStrategy implements OperationStrategy {
         int perimeter = 0;
         int side;
         int i = 0;
-        while (i < (figureConstituents.length - 2)) {
-            side = Math.abs(figureConstituents[i].getX() - figureConstituents[i + 1].getX());
+        while (i < (figureConstituents.length - 1)) {
+            side = CreateLine(figureConstituents[i], figureConstituents[i + 1]);
             perimeter += side;
             i++;
         }
-        perimeter += Math.abs(figureConstituents[figureConstituents.length - 1].getX() - figureConstituents[0].getX());
-        System.out.println(perimeter);
+        int lastSide = CreateLine(figureConstituents[figureConstituents.length - 1], figureConstituents[0]);
+        perimeter += lastSide;
         return perimeter;
     }
 }

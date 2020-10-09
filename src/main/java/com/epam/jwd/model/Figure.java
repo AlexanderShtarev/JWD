@@ -1,19 +1,26 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.model.factory.FigureType;
 import com.epam.jwd.strategy.OperationStrategy;
 
 public abstract class Figure {
     private static int id;
-    protected int figureID;
+    private int figureID;
     protected String name;
-    private OperationStrategy figurePropertiesStrategy;
+    private final OperationStrategy figurePropertiesStrategy;
     public Point[] figureConstituents;
 
     public abstract void log();
 
+    public boolean hasID() {
+        return figureID > 0;
+    }
+
     public void setID() {
         this.figureID = ++id;
+    }
+
+    int getID() {
+        return figureID;
     }
 
     Figure(String name, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
