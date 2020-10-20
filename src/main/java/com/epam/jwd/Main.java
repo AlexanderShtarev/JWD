@@ -1,65 +1,64 @@
 package com.epam.jwd;
 
+import com.epam.jwd.decorator.PostProcessingFactory;
+import com.epam.jwd.decorator.PreProcessingFactory;
 import com.epam.jwd.exception.FigureException;
-import com.epam.jwd.model.*;
+import com.epam.jwd.model.Figure;
+import com.epam.jwd.model.Point;
+import com.epam.jwd.model.factory.FigureFactory;
+import com.epam.jwd.model.factory.FigureType;
+import com.epam.jwd.model.factory.Storage;
+import com.epam.jwd.model.factory.impl.ApplicationContext;
+import com.epam.jwd.service.FigureCrud;
+import com.epam.jwd.service.impl.FigureCrudImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static com.epam.jwd.model.factory.FigureFactory.*;
-import static com.epam.jwd.model.factory.FigureType.*;
-import static com.epam.jwd.model.factory.PointFactory.POINT_FACTORY;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.epam.jwd.model.factory.FigureType.LINE;
+import static com.epam.jwd.model.factory.FigureType.SQUARE;
+import static com.epam.jwd.service.impl.FigurePostProcessorImpl.FIGURE_POST_PROCESSOR_IMPL;
+import static com.epam.jwd.service.impl.FigurePreProcessorImpl.FIGURE_PRE_PROCESSOR_IMPL;
 
 class Main {
-    final static private int POINTLENGTH = 5;
-    final static private int LINELENGTH = 4;
-    final static private int TRIANGLELENGTH = 2;
-    final static private int SQUARELENGTH = 1;
-    final static private int MULTIANGLEFIGURELENGTH = 2;
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws FigureException {
-        Point[] points = new Point[POINTLENGTH];
-        points[0] = POINT_FACTORY.createFigure(5);
-        points[1] = POINT_FACTORY.createFigure(7);
-        points[2] = POINT_FACTORY.createFigure(9);
-        points[3] = POINT_FACTORY.createFigure(6);
-        points[4] = POINT_FACTORY.createFigure(10);
+        PostProcessingFactory.addPostProcesses(FIGURE_POST_PROCESSOR_IMPL);
+        PreProcessingFactory.addPreProcesses(FIGURE_PRE_PROCESSOR_IMPL);
+        FigureFactory figureFactory = ApplicationContext.createFigureFactory();
+        Storage storage = new Storage();
+        FigureCrud figureCrud = new FigureCrudImpl(figureFactory);
+        List<Point> points = new ArrayList<>();
+        Point point1 = new Point(1, 5);
+        Point point2 = new Point(2, 4);
+        Point point3 = new Point(3, 3);
+        Point point4 = new Point(4, 2);
+        List<Figure> lines = new ArrayList<>();
+        Figure line1 = figureCrud.create(LINE, new Point[]{point1, point2});
+        Figure line2 = figureCrud.create(LINE, new Point[]{point1, point3});
+        Figure line3 = figureCrud.create(LINE, new Point[]{point2, point3});
+        lines.add(line1);
+        lines.add(line2);
+        lines.add(line3);
+        List<Integer> idOfFigures = new ArrayList<>();
+        idOfFigures.add(line1.getID());
+        idOfFigures.add(line2.getID());
+        System.out.println(figureCrud.findById(2));
+        System.out.println(figureCrud.findById(idOfFigures));
+        System.out.println(figureCrud.findAll());
+        figureCrud.delete(2);
+        figureCrud.update(1, line3);
+        System.out.println(figureCrud.findAll());
+        System.out.println(figureCrud.findByCriteria(lines, figure -> figure.getID() == 3));
 
-        int i = 0;
-        while (i < POINTLENGTH) {
-            points[i].log();
-            i++;
-        }
+        List<FigureType> figureTypes = new ArrayList<>();
 
-        Figure[] line = new Line[LINELENGTH];
-        line[0] = FIGURE_FACTORY.createFigure(LINE, new Point[]{points[0], points[1]});
-        line[1] = FIGURE_FACTORY.createFigure(LINE, new Point[]{points[0], points[2]});
-        line[2] = FIGURE_FACTORY.createFigure(LINE, new Point[]{points[0], points[3]});
-        line[3] = FIGURE_FACTORY.createFigure(LINE, new Point[]{points[0], points[1]});
-
-        for (Figure el : line) {
-            el.log();
-        }
-
-        Figure[] triangle = new Triangle[TRIANGLELENGTH];
-        triangle[0] = FIGURE_FACTORY.createFigure(TRIANGLE, new Point[]{points[0], points[1], points[2]});
-        triangle[1] = FIGURE_FACTORY.createFigure(TRIANGLE, new Point[]{points[0], points[1], points[3]});
-
-        for (Figure el : triangle) {
-            el.log();
-        }
-
-        Figure[] square = new Square[SQUARELENGTH];
-        square[0] = FIGURE_FACTORY.createFigure(SQUARE, new Point[]{points[0], points[1], points[2], points[3]});
-
-        for (Figure el : square) {
-            el.log();
-        }
-        Figure[] multiAngleFigure = new MultiAngleFigure[MULTIANGLEFIGURELENGTH];
-        multiAngleFigure[0] = FIGURE_FACTORY.createFigure(MULTIANGLEFIGURE, new Point[]{points[0], points[1], points[2],
-                points[4], points[3]});
-        multiAngleFigure[1] = FIGURE_FACTORY.createFigure(MULTIANGLEFIGURE, new Point[]{points[0], points[1], points[2],
-                points[4], points[3]});
-
-        for (Figure el : multiAngleFigure) {
-            el.log();
-        }
+        figureTypes.add(LINE);
+        figureTypes.add(SQUARE);
+        figureCrud.multiCreate(figureTypes, new Point[]{point1, point2, point3, point4});
+        System.out.println(figureCrud.findAll());
     }
 }

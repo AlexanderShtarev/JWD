@@ -3,7 +3,9 @@ package com.epam.jwd.strategy.impl;
 import com.epam.jwd.model.Point;
 import com.epam.jwd.strategy.OperationStrategy;
 
-public class SquareStrategy implements OperationStrategy {
+import static com.epam.jwd.util.CreateLineUtil.CreateLine;
+
+public final class SquareStrategy implements OperationStrategy {
     private static SquareStrategy square_strategy_instance;
 
     private SquareStrategy() {
@@ -18,13 +20,11 @@ public class SquareStrategy implements OperationStrategy {
 
     @Override
     public double doOperationArea(Point[] figureConstituents) {
-        int a = Math.abs(figureConstituents[0].getX() - figureConstituents[1].getX());
-        return a * a;
+        return CreateLine(figureConstituents[0], figureConstituents[1]) * CreateLine(figureConstituents[0], figureConstituents[1]);
     }
 
     @Override
     public int doOperationPerimeter(Point[] figureConstituents) {
-        int a = Math.abs(figureConstituents[0].getX() - figureConstituents[1].getX());
-        return a * 4;
+        return CreateLine(figureConstituents[0], figureConstituents[1]) * 4;
     }
 }

@@ -5,15 +5,34 @@ import com.epam.jwd.strategy.OperationStrategy;
 
 public abstract class Figure {
     private static int id;
-    protected int figureID;
-    protected String name;
-    private OperationStrategy figurePropertiesStrategy;
-    public Point[] figureConstituents;
-
-    public abstract void log();
+    int figureID;
+    String name;
+    private final OperationStrategy figurePropertiesStrategy;
+    protected Point[] figureConstituents;
+    private FigureType type;
 
     public void setID() {
         this.figureID = ++id;
+    }
+
+    public int getID() {
+        return figureID;
+    }
+
+    public boolean hasID() {
+        return figureID > 0;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public FigureType getType() {
+        return type;
+    }
+
+    public Point[] getModel() {
+        return figureConstituents;
     }
 
     Figure(String name, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
@@ -30,7 +49,5 @@ public abstract class Figure {
         return figurePropertiesStrategy.doOperationPerimeter(figureConstituents);
     }
 
-    public Point[] getModel() {
-        return figureConstituents;
-    }
+    public abstract void log();
 }

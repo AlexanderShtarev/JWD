@@ -7,68 +7,23 @@ import com.epam.jwd.model.Point;
 import com.epam.jwd.model.factory.FigureType;
 import com.epam.jwd.model.factory.Storage;
 import com.epam.jwd.service.FigurePreProcessor;
+import com.epam.jwd.util.CheckIfFigureUtil;
+import com.epam.jwd.util.exists.FigureExistUtil;
 
 public class FigurePreProcessorImpl implements FigurePreProcessor {
-    private boolean isFigure = true;
-    private boolean isExists;
-    private Point[] points;
-    private FigureType type;
+    public final static FigurePreProcessorImpl FIGURE_PRE_PROCESSOR_IMPL = new FigurePreProcessorImpl();
+
+    private FigurePreProcessorImpl() {
+    }
 
     @Override
     public Figure process(FigureType type, Point[] points) throws FigureException {
-        this.points = points;
-        this.type = type;
-        if (!isFigure()) throw new FigureException();
-        if (!exists()) throw new FigureNotExistException();
-        return Storage.checkIsUnique(type, points);
-    }
-
-    private boolean isFigure() {
-        int i = 0;
-        int j = 1;
-        while (i < points.length - 1) {
-            while (j < points.length) {
-                if (points[i].getX() == points[j].getX()) {
-                    isFigure = false;
-                }
-                j++;
-            }
-            i++;
-            j = i + 1;
+        if (!CheckIfFigureUtil.checkIfFigure(points)) {
+            throw new FigureException();
         }
-        return isFigure;
-    }
-
-    private boolean exists() {
-        switch (type) {
-            case LINE:
-                isExists = Math.abs(points[0].getX() - points[1].getX()) > 0;
-                break;
-            case TRIANGLE:
-                isExists = ((Math.abs(points[0].getX() - points[1].getX()) <
-                        Math.abs(points[1].getX() - points[2].getX()) + Math.abs(points[2].getX() - points[0].getX())))
-                        && ((Math.abs(points[1].getX() - points[2].getX()) <
-                        Math.abs(points[2].getX() - points[0].getX()) + Math.abs(points[0].getX() - points[1].getX())))
-                        && ((Math.abs(points[2].getX() - points[0].getX()) <
-                        Math.abs(points[1].getX() - points[2].getX()) + Math.abs(points[0].getX() - points[1].getX())));
-                break;
-            case SQUARE:
-                isExists = ((points[0].getX() - points[1].getX() == points[1].getX() - points[2].getX())
-                        && ((points[2].getX() - points[3].getX() == points[3].getX() - points[0].getX())))
-                        || ((points[0].getX() - points[1].getX() == points[1].getX() - points[2].getX())
-                        && ((points[2].getX() - points[3].getX() == points[3].getX() - points[0].getX())))
-                        || ((points[0].getX() - points[1].getX() == points[1].getX() - points[2].getX())
-                        && ((points[2].getX() - points[3].getX() == points[3].getX() - points[0].getX())));
-                break;
-            case MULTIANGLEFIGURE:
-                int i = 0;
-                int p = 0;
-                while (i < points.length - 2) {
-                    p += Math.abs(points[i].getX() - points[i + 1].getX());
-                }
-                isExists = (points[points.length - 1].getX() - points[0].getX()) < p;
-                break;
+        if (!FigureExistUtil.exists(type, points)) {
+            throw new FigureNotExistException();
         }
-        return isExists;
+        return Storage.checkIfUnique(points).orElse(null);
     }
 }
