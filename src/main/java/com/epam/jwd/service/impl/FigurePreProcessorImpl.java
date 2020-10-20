@@ -16,7 +16,6 @@ public class FigurePreProcessorImpl implements FigurePreProcessor {
     private FigurePreProcessorImpl() {
     }
 
-    @Override
     public Figure process(FigureType type, Point[] points) throws FigureException {
         if (!CheckIfFigureUtil.checkIfFigure(points)) {
             throw new FigureException();

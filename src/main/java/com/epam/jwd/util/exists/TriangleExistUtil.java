@@ -6,7 +6,7 @@ import static com.epam.jwd.util.CreateLineUtil.CreateLine;
 
 class TriangleExistUtil {
 
-    static boolean exists(Point[] figureConstituents) {
+    public static boolean exists(Point[] figureConstituents) {
         boolean isExist;
         isExist = (CreateLine(figureConstituents[0], figureConstituents[1]) < (CreateLine(figureConstituents[1], figureConstituents[2]) + CreateLine(figureConstituents[2], figureConstituents[0])))
                 && (CreateLine(figureConstituents[1], figureConstituents[2]) < (CreateLine(figureConstituents[2], figureConstituents[0]) + CreateLine(figureConstituents[0], figureConstituents[1])))

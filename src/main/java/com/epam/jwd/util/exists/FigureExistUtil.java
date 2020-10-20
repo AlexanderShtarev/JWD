@@ -17,8 +17,6 @@ public abstract class FigureExistUtil {
                 isExist = SquareExistUtil.exists(figureConstituents);
                 break;
             case MULTI_ANGLE_FIGURE:
-                isExist = MultiAngleExistUtil.exists(figureConstituents);
-                break;
             default:
                 throw new IllegalArgumentException("Wrong Figure type:" + type);
         }

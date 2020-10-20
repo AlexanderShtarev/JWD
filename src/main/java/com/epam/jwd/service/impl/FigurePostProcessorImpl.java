@@ -10,7 +10,6 @@ public class FigurePostProcessorImpl implements FigurePostProcessor {
     private FigurePostProcessorImpl() {
     }
 
-    @Override
     public Figure process(Figure figure) {
         if (figure.hasID()) {
             return figure;

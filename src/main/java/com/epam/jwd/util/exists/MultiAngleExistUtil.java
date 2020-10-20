@@ -5,7 +5,7 @@ import com.epam.jwd.model.Point;
 import static com.epam.jwd.util.CreateLineUtil.CreateLine;
 
 class MultiAngleExistUtil {
-    static boolean exists(Point[] figureConstituents) {
+    public static boolean exists(Point[] figureConstituents) {
         boolean isExist;
         int i = 0;
         int p = 0;

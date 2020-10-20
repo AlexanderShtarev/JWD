@@ -3,8 +3,6 @@ package com.epam.jwd.strategy.impl;
 import com.epam.jwd.model.Point;
 import com.epam.jwd.strategy.OperationStrategy;
 
-import java.util.Arrays;
-
 import static com.epam.jwd.util.CreateLineUtil.CreateLine;
 
 public class MultiAngleStrategy implements OperationStrategy {

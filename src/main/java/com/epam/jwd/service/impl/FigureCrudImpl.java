@@ -29,7 +29,6 @@ public class FigureCrudImpl implements FigureCrud {
         figureTypes.forEach(figureType -> {
             try {
                 figureFactory.createFigure(figureType, points);
-                System.out.println(figureType + " " + Arrays.toString(points));
             } catch (FigureException e) {
                 e.printStackTrace();
             }
