@@ -6,8 +6,6 @@ import com.epam.jwd.model.Point;
 import com.epam.jwd.model.factory.FigureFactory;
 import com.epam.jwd.model.factory.FigureType;
 
-import java.util.List;
-
 public abstract class FigureFactoryDecorator implements FigureFactory {
     private final FigureFactory figureFactory;
 

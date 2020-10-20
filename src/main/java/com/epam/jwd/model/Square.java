@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 
 public class Square extends Figure {
-    private static final Logger log = LoggerFactory.getLogger(Square.class);
+    private static Logger log = LoggerFactory.getLogger(Square.class);
 
     public static Square createModel(String name, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
         return new Square(name, figurePropertiesStrategy, figureConstituents);

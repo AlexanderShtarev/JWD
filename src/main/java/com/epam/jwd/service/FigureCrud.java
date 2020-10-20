@@ -6,7 +6,6 @@ import com.epam.jwd.model.Point;
 import com.epam.jwd.model.factory.FigureType;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public interface FigureCrud {
 
@@ -26,5 +25,5 @@ public interface FigureCrud {
 
     List<Figure> findById(List<Integer> id);
 
-    List<Figure> findByCriteria(List<Figure> figures, Predicate<Figure> predicate);
+    List<Figure> findByCriteria(Criteria criteria);
 }

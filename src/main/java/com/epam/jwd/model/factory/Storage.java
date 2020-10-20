@@ -2,9 +2,11 @@ package com.epam.jwd.model.factory;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.epam.jwd.model.Figure;
 import com.epam.jwd.model.Point;
+import com.epam.jwd.service.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,14 +22,6 @@ public class Storage {
 
     public static List<Figure> findAll() {
         return figures;
-    }
-
-    public static List<Figure> findByCriteria(List<Figure> figures, Predicate<Figure> predicate) {
-        List<Figure> figuresToFind = new ArrayList<>();
-        for (Figure figure : figures)
-            if (predicate.test(figure))
-                figuresToFind.add(figure);
-        return figuresToFind;
     }
 
     public static void addToStorage(Figure figure) {
@@ -56,14 +50,13 @@ public class Storage {
         return figures.stream().filter((figure) -> figure.getID() == id).findAny().get();
     }
 
-    public static List<Figure> findById(List<Integer> id) {
+    public static List<Figure> findById(List<Integer> idList) {
         List<Figure> figuresToReturn = new ArrayList<>();
-        for (Integer idToFind : id)
-            for (Figure figure : figures) {
-                if (figure.getID() == idToFind) {
-                    figuresToReturn.add(figure);
-                }
+        idList.forEach(integer -> figures.forEach(figure -> {
+            if (figure.getID() == integer) {
+                figuresToReturn.add(figure);
             }
+        }));
         return figuresToReturn;
     }
 }

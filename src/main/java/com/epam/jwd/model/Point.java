@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Point {
-    private static final Logger log = LoggerFactory.getLogger(Point.class);
+    private static Logger log = LoggerFactory.getLogger(Point.class);
 
     private int x;
     private int y;

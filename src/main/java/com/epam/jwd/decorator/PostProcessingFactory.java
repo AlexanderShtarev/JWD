@@ -15,6 +15,7 @@ import java.util.List;
 public class PostProcessingFactory extends FigureFactoryDecorator {
     private static List<FigurePostProcessor> postProcessors = new ArrayList<>();
     private static Logger log = LoggerFactory.getLogger(PostProcessingFactory.class);
+
     public PostProcessingFactory(FigureFactory figureFactory, List<FigurePostProcessor> postProcessors) {
         super(figureFactory);
         PostProcessingFactory.postProcessors = postProcessors;
@@ -47,6 +48,6 @@ public class PostProcessingFactory extends FigureFactoryDecorator {
                 e.printStackTrace();
             }
         });
-        return figure;
+        return postProcessorFigures.get(0);
     }
 }

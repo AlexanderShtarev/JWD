@@ -3,7 +3,7 @@ package com.epam.jwd.model;
 import com.epam.jwd.model.factory.FigureType;
 import com.epam.jwd.strategy.OperationStrategy;
 
-public abstract class Figure {
+public class Figure {
     private static int id;
     int figureID;
     String name;
@@ -35,7 +35,7 @@ public abstract class Figure {
         return figureConstituents;
     }
 
-    Figure(String name, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+    public Figure(String name, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
         this.figurePropertiesStrategy = figurePropertiesStrategy;
         this.name = name;
         this.figureConstituents = figureConstituents;
@@ -49,5 +49,4 @@ public abstract class Figure {
         return figurePropertiesStrategy.doOperationPerimeter(figureConstituents);
     }
 
-    public abstract void log();
 }

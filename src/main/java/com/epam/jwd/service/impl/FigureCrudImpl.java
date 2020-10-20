@@ -6,11 +6,10 @@ import com.epam.jwd.model.Point;
 import com.epam.jwd.model.factory.FigureFactory;
 import com.epam.jwd.model.factory.FigureType;
 import com.epam.jwd.model.factory.Storage;
+import com.epam.jwd.service.Criteria;
 import com.epam.jwd.service.FigureCrud;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class FigureCrudImpl implements FigureCrud {
     private FigureFactory figureFactory;
@@ -66,7 +65,7 @@ public class FigureCrudImpl implements FigureCrud {
     }
 
     @Override
-    public List<Figure> findByCriteria(List<Figure> figures, Predicate<Figure> predicate) {
-        return Storage.findByCriteria(figures, predicate);
+    public List<Figure> findByCriteria(Criteria criteria) {
+        return Storage.findByCriteria(criteria);
     }
 }

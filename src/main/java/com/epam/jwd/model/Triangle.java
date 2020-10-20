@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 
 public class Triangle extends Figure {
-    private static final Logger log = LoggerFactory.getLogger(Triangle.class);
+    private static Logger log = LoggerFactory.getLogger(Triangle.class);
 
     public static Triangle createModel(String name, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
         return new Triangle(name, figurePropertiesStrategy, figureConstituents);
