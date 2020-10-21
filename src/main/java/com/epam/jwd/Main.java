@@ -8,18 +8,18 @@ import com.epam.jwd.model.Point;
 import com.epam.jwd.model.factory.FigureFactory;
 import com.epam.jwd.model.factory.Storage;
 import com.epam.jwd.model.factory.impl.ApplicationContext;
-import com.epam.jwd.service.Criteria;
 import com.epam.jwd.service.FigureCrud;
-import com.epam.jwd.service.impl.CriteriaImpl;
+import com.epam.jwd.service.impl.Criteria;
 import com.epam.jwd.service.impl.FigureCrudImpl;
+import com.epam.jwd.service.impl.MultiCreateFigureContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 import static com.epam.jwd.model.factory.FigureType.LINE;
+import static com.epam.jwd.model.factory.FigureType.TRIANGLE;
 import static com.epam.jwd.service.impl.FigurePostProcessorImpl.FIGURE_POST_PROCESSOR_IMPL;
 import static com.epam.jwd.service.impl.FigurePreProcessorImpl.FIGURE_PRE_PROCESSOR_IMPL;
 
@@ -52,12 +52,21 @@ class Main {
         List<Integer> idList = new ArrayList<>();
         idList.add(line1.getID());
         idList.add(line2.getID());
-
-
-        Criteria criteria = new CriteriaImpl().setFigureType(LINE).setId(2);
+        MultiCreateFigureContext line4 = new MultiCreateFigureContext(LINE, new Point[]{point1, point4});
+        MultiCreateFigureContext line5 = new MultiCreateFigureContext(LINE, new Point[]{point3, point4});
+        MultiCreateFigureContext triangle1 = new MultiCreateFigureContext(TRIANGLE, new Point[]{point2, point1, point4});
+        List<MultiCreateFigureContext> multiCreateList = new ArrayList<>();
+        multiCreateList.add(line4);
+        multiCreateList.add(line5);
+        multiCreateList.add(triangle1);
+        figureCrud.multiCreate(multiCreateList);
+        Criteria criteria = Criteria.newBuilder()
+                .setId(2)
+                .setName("Line")
+                .build();
         List<Figure> figuresByCriteria = (figureCrud.findByCriteria(criteria));
         System.out.println(figuresByCriteria);
         figureCrud.delete(idList);
-
+        System.out.println(figureCrud.findAll());
     }
 }

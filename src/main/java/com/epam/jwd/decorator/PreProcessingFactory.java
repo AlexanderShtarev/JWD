@@ -38,16 +38,12 @@ public class PreProcessingFactory extends FigureFactoryDecorator {
 
     @Override
     public Figure createFigure(FigureType type, Point[] figureConstituents) throws FigureException {
-        List<Figure> preProcessorFigures = new ArrayList<>();
-        preProcessors.forEach(preProcessor -> {
-            try {
-                preProcessorFigures.add(preProcessor.process(type, figureConstituents));
-            } catch (FigureException e) {
-                e.printStackTrace();
-            }
-        });
-        if (preProcessorFigures.get(0) != null) {
-            return preProcessorFigures.get(0);
+        Figure preProcessorFigure = null;
+        for (FigurePreProcessor preProcessor : preProcessors) {
+            preProcessorFigure = preProcessor.process(type,figureConstituents);
+        }
+        if (preProcessorFigure != null) {
+            return preProcessorFigure;
         }
         return super.createFigure(type, figureConstituents);
     }

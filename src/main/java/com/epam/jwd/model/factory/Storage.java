@@ -1,18 +1,13 @@
 package com.epam.jwd.model.factory;
 
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import com.epam.jwd.model.Figure;
 import com.epam.jwd.model.Point;
-import com.epam.jwd.service.Criteria;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.epam.jwd.service.impl.Criteria;
 
 public class Storage {
     private static List<Figure> figures = new ArrayList<>();
-    private static Logger log = LoggerFactory.getLogger(Storage.class);
 
     public static Optional<Figure> checkIfUnique(Point[] points) {
         return figures.stream()
@@ -32,10 +27,10 @@ public class Storage {
         figures.removeIf(figure -> figure.getID() == id);
     }
 
-    public static void delete(List<Integer> id) {
+    public static void delete(List<Integer> idOfFiguresToDelete) {
         List<Figure> toRemove = new ArrayList<>();
-        id.forEach(idToDelete -> figures.forEach(figure -> {
-            if (figure.getID() == idToDelete) {
+        idOfFiguresToDelete.forEach(id -> figures.forEach(figure -> {
+            if (figure.getID() == id) {
                 toRemove.add(figure);
             }
         }));
@@ -57,6 +52,18 @@ public class Storage {
                 figuresToReturn.add(figure);
             }
         }));
+        return figuresToReturn;
+    }
+
+    public static List<Figure> findByCriteria(Criteria criteria) {
+        List<Figure> figuresToReturn = new ArrayList<>();
+        figures.forEach(figure -> {
+            if ((criteria.getId() != 0) && (figure.getID() == criteria.getId())
+                    && (Objects.equals(criteria.getName(), figure.getName()))
+                    && (Objects.equals(criteria.getFigureType(), figure.getType()))) {
+                figuresToReturn.add(figure);
+            }
+        });
         return figuresToReturn;
     }
 }

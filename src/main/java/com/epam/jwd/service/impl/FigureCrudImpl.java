@@ -6,7 +6,6 @@ import com.epam.jwd.model.Point;
 import com.epam.jwd.model.factory.FigureFactory;
 import com.epam.jwd.model.factory.FigureType;
 import com.epam.jwd.model.factory.Storage;
-import com.epam.jwd.service.Criteria;
 import com.epam.jwd.service.FigureCrud;
 
 import java.util.List;
@@ -24,10 +23,10 @@ public class FigureCrudImpl implements FigureCrud {
     }
 
     @Override
-    public void multiCreate(List<FigureType> figureTypes, Point[] points) throws FigureException {
-        figureTypes.forEach(figureType -> {
+    public void multiCreate(List<MultiCreateFigureContext> multuCreateList) throws FigureException {
+        multuCreateList.forEach(figure -> {
             try {
-                figureFactory.createFigure(figureType, points);
+                figureFactory.createFigure(figure.getType(), figure.getPoints());
             } catch (FigureException e) {
                 e.printStackTrace();
             }

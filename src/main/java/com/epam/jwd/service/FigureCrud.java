@@ -4,6 +4,8 @@ import com.epam.jwd.exception.FigureException;
 import com.epam.jwd.model.Figure;
 import com.epam.jwd.model.Point;
 import com.epam.jwd.model.factory.FigureType;
+import com.epam.jwd.service.impl.MultiCreateFigureContext;
+import com.epam.jwd.service.impl.Criteria;
 
 import java.util.List;
 
@@ -11,7 +13,7 @@ public interface FigureCrud {
 
     Figure create(FigureType figureType, Point[] figureConstituents) throws FigureException;
 
-    void multiCreate(List<FigureType> figureTypes, Point[] points) throws FigureException;
+    void multiCreate(List<MultiCreateFigureContext> multuCreateList) throws FigureException;
 
     void delete(int id);
 

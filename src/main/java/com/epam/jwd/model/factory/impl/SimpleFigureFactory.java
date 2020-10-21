@@ -16,7 +16,7 @@ public class SimpleFigureFactory implements FigureFactory {
     }
 
     public Figure createFigure(FigureType figureType, Point[] figureConstituents) {
-        Figure toReturn = null;
+        Figure toReturn;
         switch (figureType) {
             case LINE:
                 toReturn = Line.createModel("Line", line_strategy_instance, figureConstituents);

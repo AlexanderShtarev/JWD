@@ -40,14 +40,9 @@ public class PostProcessingFactory extends FigureFactoryDecorator {
     @Override
     public Figure createFigure(FigureType type, Point[] figureConstituents) throws FigureException {
         Figure figure = super.createFigure(type, figureConstituents);
-        List<Figure> postProcessorFigures = new ArrayList<>();
-        postProcessors.forEach(postProcessor -> {
-            try {
-                postProcessorFigures.add(postProcessor.process(figure));
-            } catch (FigureException e) {
-                e.printStackTrace();
-            }
-        });
-        return postProcessorFigures.get(0);
+        for (FigurePostProcessor postProcessor : postProcessors) {
+            figure = postProcessor.process(figure);
+        }
+        return figure;
     }
 }
