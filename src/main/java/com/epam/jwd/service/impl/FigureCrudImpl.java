@@ -7,12 +7,15 @@ import com.epam.jwd.model.factory.FigureFactory;
 import com.epam.jwd.model.factory.FigureType;
 import com.epam.jwd.model.factory.Storage;
 import com.epam.jwd.service.FigureCrud;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FigureCrudImpl implements FigureCrud {
     private FigureFactory figureFactory;
-
+    private static Logger log = LoggerFactory.getLogger(FigureCrud.class);
     public FigureCrudImpl(FigureFactory figureFactory) {
         this.figureFactory = figureFactory;
     }
@@ -45,6 +48,7 @@ public class FigureCrudImpl implements FigureCrud {
 
     @Override
     public List<Figure> findAll() {
+        log.info(Storage.findAll() + "");
         return Storage.findAll();
     }
 
@@ -55,16 +59,19 @@ public class FigureCrudImpl implements FigureCrud {
 
     @Override
     public Figure findById(int id) {
+        log.info(Storage.findById(id) + "");
         return Storage.findById(id);
     }
 
     @Override
     public List<Figure> findById(List<Integer> id) {
+        log.info(Storage.findById(id) + "");
         return Storage.findById(id);
     }
 
     @Override
     public List<Figure> findByCriteria(Criteria criteria) {
+        log.info(Storage.findByCriteria(criteria) + "");
         return Storage.findByCriteria(criteria);
     }
 }

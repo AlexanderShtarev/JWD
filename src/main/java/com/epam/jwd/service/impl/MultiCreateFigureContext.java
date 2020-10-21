@@ -7,15 +7,16 @@ public class MultiCreateFigureContext {
     private FigureType figureType;
     private Point[] figureConstituents;
 
-    public MultiCreateFigureContext(FigureType figureType, Point[] figureContituents) {
-        this.figureConstituents = figureContituents;
+    public MultiCreateFigureContext(FigureType figureType, Point[] figureConstituents) {
+        this.figureConstituents = figureConstituents;
         this.figureType = figureType;
     }
-    public FigureType getType() {
+
+    FigureType getType() {
         return figureType;
     }
 
-    public Point[] getPoints() {
+    Point[] getPoints() {
         return figureConstituents;
     }
 }
