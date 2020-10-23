@@ -1,21 +1,23 @@
 package com.epam.jwd.model;
 
-import com.epam.jwd.strategy.impl.LineStrategy;
+import com.epam.jwd.strategy.OperationStrategy;
+import com.epam.jwd.util.CreateLineUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Line extends Figure {
-    private static Logger log = LoggerFactory.getLogger(Line.class);
+import java.util.Arrays;
 
-    public static Line createLine(String name, LineStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+public class Line extends Figure {
+    private static final Logger log = LoggerFactory.getLogger(Line.class);
+    private final int line;
+
+    public static Line createModel(String name, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
         return new Line(name, figurePropertiesStrategy, figureConstituents);
     }
 
-    private int line;
-
-    private Line(String name, LineStrategy figurePropertiesStrategy, Point[] figureConstituents) {
+    private Line(String name, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
         super(name, figurePropertiesStrategy, figureConstituents);
-        line = Math.abs(figureConstituents[0].getX() - figureConstituents[1].getX());
+        line = CreateLineUtil.CreateLine(figureConstituents[0], figureConstituents[1]);
     }
 
     public void log() {
@@ -23,12 +25,7 @@ public class Line extends Figure {
     }
 
     @Override
-    public Point[] getModel() {
-        return figureConstituents;
-    }
-
-    @Override
     public String toString() {
-        return "Name: " + name + " ID: " + figureID + " Length: " + line;
+        return "Name: " + getName() + ", ID: " + getID() + ", Length: " + line;
     }
 }
