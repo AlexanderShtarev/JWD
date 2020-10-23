@@ -12,6 +12,8 @@ import com.epam.jwd.service.FigureCrud;
 import com.epam.jwd.service.impl.Criteria;
 import com.epam.jwd.service.impl.FigureCrudImpl;
 import com.epam.jwd.service.impl.MultiCreateFigureContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,8 @@ import static com.epam.jwd.service.impl.FigurePostProcessorImpl.FIGURE_POST_PROC
 import static com.epam.jwd.service.impl.FigurePreProcessorImpl.FIGURE_PRE_PROCESSOR_IMPL;
 
 class Main {
+    private final static Logger log = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) throws FigureException {
         PostProcessingFactory.addPostProcesses(FIGURE_POST_PROCESSOR_IMPL);
         PreProcessingFactory.addPreProcesses(FIGURE_PRE_PROCESSOR_IMPL);
@@ -54,9 +58,9 @@ class Main {
                 .setId(10)
                 .setName("Line")
                 .build();
-        System.out.println(figureCrud.findByCriteria(criteria));
+        log.info(" " + figureCrud.findByCriteria(criteria));
 
-        System.out.println(figureCrud.findById(1));
+        log.info(" " + figureCrud.findById(1));
 
         figureCrud.delete(2);
 
@@ -67,6 +71,6 @@ class Main {
 
         figureCrud.update(4, line3);
 
-        System.out.println(figureCrud.findAll());
+        log.info(" " + figureCrud.findAll());
     }
 }
