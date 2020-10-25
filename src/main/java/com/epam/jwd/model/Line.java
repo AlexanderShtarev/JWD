@@ -5,8 +5,6 @@ import com.epam.jwd.util.CreateLineUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-
 public class Line extends Figure {
     private static final Logger log = LoggerFactory.getLogger(Line.class);
     private final int line;
@@ -26,6 +24,6 @@ public class Line extends Figure {
 
     @Override
     public String toString() {
-        return "Name: " + getName() + ", ID: " + getID() + ", Length: " + line;
+        return "Name: " + getNAME() + ", ID: " + getID() + ", Length: " + line;
     }
 }

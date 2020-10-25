@@ -8,55 +8,55 @@ import com.epam.jwd.model.Point;
 import com.epam.jwd.service.impl.Criteria;
 
 public class Storage {
-    private static final List<Figure> STORAGE_FIGURES = new ArrayList<>();
+    private static List<Figure> storageFigures = new ArrayList<>();
 
     private Storage() {
     }
 
     public static void addToStorage(Figure figure) {
-        STORAGE_FIGURES.add(figure);
+        storageFigures.add(figure);
     }
 
     public static void update(int id, Figure figure) {
-        STORAGE_FIGURES.set(STORAGE_FIGURES.indexOf(STORAGE_FIGURES.get(id - 1)), figure);
+        storageFigures.set(storageFigures.indexOf(storageFigures.get(id - 1)), figure);
     }
 
     public static void delete(long id) {
-        STORAGE_FIGURES.removeIf(figure -> figure.getID() == id);
+        storageFigures.removeIf(figure -> figure.getID() == id);
     }
 
     public static void delete(List<Integer> figureId) {
         List<Figure> toDelete =
-                STORAGE_FIGURES.stream()
+                storageFigures.stream()
                         .filter(figure -> figureId.stream().anyMatch(id -> id == figure.getID()))
                         .collect(Collectors.toList());
-        STORAGE_FIGURES.removeAll(toDelete);
+        storageFigures.removeAll(toDelete);
     }
 
     public static List<Figure> findAll() {
-        return STORAGE_FIGURES;
+        return storageFigures;
     }
 
     public static Optional<Figure> findById(int id) {
-        return STORAGE_FIGURES.stream().filter((figure) -> figure.getID() == id).findAny();
+        return storageFigures.stream().filter((figure) -> figure.getID() == id).findAny();
     }
 
     public static List<Figure> findById(List<Integer> idList) {
-        return STORAGE_FIGURES.stream()
+        return storageFigures.stream()
                 .filter(figure -> idList.stream().anyMatch(id -> id == figure.getID()))
                 .collect(Collectors.toList());
     }
 
     public static List<Figure> findByCriteria(Criteria criteria) {
-        return STORAGE_FIGURES.stream()
+        return storageFigures.stream()
                 .filter(figure -> (criteria.getId() != 0) && (criteria.getId() == figure.getID()))
                 .filter(figure -> Objects.equals(criteria.getFigureType(), figure.getType()))
-                .filter(figure -> Objects.equals(criteria.getName(), figure.getName()))
+                .filter(figure -> Objects.equals(criteria.getName(), figure.getNAME()))
                 .collect(Collectors.toList());
     }
 
     public static Optional<Figure> checkIfUnique(Point[] points) {
-        return STORAGE_FIGURES.stream()
+        return storageFigures.stream()
                 .filter(figure -> Arrays.equals(figure.getModel(), points))
                 .findFirst();
     }

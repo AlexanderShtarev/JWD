@@ -68,7 +68,7 @@ class Main {
         idList.add(line1.getID());
         idList.add(line2.getID());
         figureCrud.delete(idList);
-
+        figureCrud.create(LINE, new Point[]{point1, point1});
         figureCrud.update(4, line3);
 
         log.info(" " + figureCrud.findAll());

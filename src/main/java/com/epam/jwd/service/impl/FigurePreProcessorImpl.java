@@ -12,7 +12,6 @@ import com.epam.jwd.util.exists.FigureExistUtil;
 
 public class FigurePreProcessorImpl implements FigurePreProcessor {
     public final static FigurePreProcessorImpl FIGURE_PRE_PROCESSOR_IMPL = new FigurePreProcessorImpl();
-
     private FigurePreProcessorImpl() {
     }
 

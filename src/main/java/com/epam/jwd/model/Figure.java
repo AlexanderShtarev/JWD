@@ -5,8 +5,8 @@ import com.epam.jwd.strategy.OperationStrategy;
 
 public abstract class Figure {
     private static int id;
-    int figureID;
-    String name;
+    private int figureID;
+    private final String NAME;
     private final OperationStrategy figurePropertiesStrategy;
     protected Point[] figureConstituents;
     protected FigureType type;
@@ -23,8 +23,8 @@ public abstract class Figure {
         return figureID > 0;
     }
 
-    public String getName() {
-        return name;
+    public String getNAME() {
+        return NAME;
     }
 
     public FigureType getType() {
@@ -37,7 +37,7 @@ public abstract class Figure {
 
     public Figure(String name, OperationStrategy figurePropertiesStrategy, Point[] figureConstituents) {
         this.figurePropertiesStrategy = figurePropertiesStrategy;
-        this.name = name;
+        this.NAME = name;
         this.figureConstituents = figureConstituents;
     }
 
